@@ -21,6 +21,7 @@ WEB_ROOT = ROOT / "maimai_web"
 OUTPUT_ROOT = ROOT / "output"
 UPLOAD_ROOT = ROOT / ".generator_uploads"
 MODEL_COMMANDS = {
+    "v2.2-handflow": ("-m", "v22.generate_v22"),
     "v2.1-handflow": ("-m", "v2.generate_16m_handflow_dynamic_arranger"),
 }
 DENSITY_PROFILE_PATH = ROOT / "runtime_data" / "test_density_profile.json"
@@ -115,7 +116,7 @@ async def density_profile() -> dict:
 @app.post("/api/generate")
 async def generate(
     audio: UploadFile = File(...),
-    model: str = Form("v2.1-handflow"),
+    model: str = Form("v2.2-handflow"),
     title: str = Form(...),
     artist: str = Form("Unknown"),
     bpm: float | None = Form(None),

@@ -149,6 +149,8 @@ class HybridStack(nn.Module):
 class Trans1Arranger(nn.Module):
     """Parallel iterative Transformer arranger for the isolated Trans-1 experiment."""
 
+    supports_scheduled_sampling = True
+
     def __init__(
         self,
         dimension: int = 128,
@@ -212,12 +214,45 @@ class Trans1Arranger(nn.Module):
         )
         return self.decoder(hidden, padding)
 
-    def forward(self, batch: dict[str, torch.Tensor]) -> dict[str, torch.Tensor]:
+    def forward(
+        self,
+        batch: dict[str, torch.Tensor],
+        teacher_forcing_ratio: float = 1.0,
+    ) -> dict[str, torch.Tensor]:
         context = self.encode_plan(batch)
         pattern_logits = self.pattern_head(context)
-        pattern_tokens = batch.get("target_pattern", pattern_logits.argmax(dim=-1))
+        predicted_pattern = pattern_logits.argmax(dim=-1)
+        target_pattern = batch.get("target_pattern")
+        ratio = min(1.0, max(0.0, float(teacher_forcing_ratio)))
+        if target_pattern is None or ratio <= 0.0:
+            pattern_tokens = predicted_pattern
+        elif ratio >= 1.0:
+            pattern_tokens = target_pattern
+        else:
+            use_teacher = torch.rand_like(target_pattern, dtype=torch.float32) < ratio
+            pattern_tokens = torch.where(use_teacher, target_pattern, predicted_pattern)
         padding = self._padding_mask(batch, context.shape[1])
-        hidden = self.decode(context, pattern_tokens, batch["previous_delta"], padding)
+        previous_delta = batch["previous_delta"]
+        if ratio < 1.0:
+            bootstrap_previous = torch.full_like(previous_delta, 8)
+            if ratio > 0.0:
+                bootstrap_teacher = torch.rand_like(previous_delta, dtype=torch.float32) < ratio
+                bootstrap_teacher[:, 0] = False
+                bootstrap_previous = torch.where(
+                    bootstrap_teacher, previous_delta, bootstrap_previous
+                )
+            with torch.no_grad():
+                bootstrap = self.decode(context, pattern_tokens, bootstrap_previous, padding)
+                predicted_delta = self.delta_head(bootstrap).argmax(dim=-1)
+            predicted_previous = torch.full_like(previous_delta, 8)
+            predicted_previous[:, 1:] = predicted_delta[:, :-1]
+            if ratio <= 0.0:
+                previous_delta = predicted_previous
+            else:
+                use_teacher = torch.rand_like(previous_delta, dtype=torch.float32) < ratio
+                use_teacher[:, 0] = False
+                previous_delta = torch.where(use_teacher, previous_delta, predicted_previous)
+        hidden = self.decode(context, pattern_tokens, previous_delta, padding)
         return {
             "delta": self.delta_head(hidden),
             "operator": self.operator_head(hidden),

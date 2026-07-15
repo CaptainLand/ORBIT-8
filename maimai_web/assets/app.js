@@ -156,13 +156,14 @@ function displayModelName(value) {
     "v2": "ORBIT-8 v2",
     "v2-16m": "ORBIT-8 v2 16M",
     "v2.1-handflow": "ORBIT-8 v2.1 HandFlow",
+    "v2.2-handflow": "ORBIT-8 v2.2 HandFlow",
   }[value] || value;
 }
 
 function renderResult(data) {
   const report = data.report || {};
   const types = report.event_types || {};
-  const modelName = displayModelName(report.web_model || "v2.1-handflow");
+  const modelName = displayModelName(report.web_model || "v2.2-handflow");
   resultState.innerHTML = `
     <h3 class="result-title">${escapeHtml(data.folder_name)}</h3>
     <p class="model-result">${modelName}</p>

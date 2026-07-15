@@ -3,10 +3,11 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
 
 > [!IMPORTANT]
-> **Repository source archives do not include model checkpoints.** Download the
-> complete `ORBIT-8-v2.1.0-preview-windows.zip` asset from
-> [GitHub Releases](https://github.com/CaptainLand/ORBIT-8/releases) to run the
-> model. Training data is intentionally not distributed.
+> **Repository source archives do not include model checkpoints.** Download
+> `ORBIT-8-v2.2-models.zip` from
+> [GitHub Releases](https://github.com/CaptainLand/ORBIT-8/releases), then place
+> its two `.pt` files in `v22/releases/`. Training data is intentionally not
+> distributed.
 
 **Neural maimai chart engine by SeaLandX.**
 
@@ -55,11 +56,13 @@ The neural output then passes through a deterministic playability layer:
 | ORBIT-8 v1.7.1 | consensus onset pipeline | official-pattern arranger | rule validation |
 | Trans-02 | rhythm Transformer | Trans-1 Transformer | rule validation |
 | ORBIT-8 v2.1 HandFlow | calibrated 16M Transformer | dynamic Trans-1 Transformer | strict two-hand HandFlow |
+| ORBIT-8 v2.2 HandFlow | held-out calibrated 16M Transformer | scheduled-sampling Trans arranger | full-song HandFlow acceptance |
 
-The current experimental mainline is **ORBIT-8 v2.1 HandFlow**. Its dynamic
-arranger is trained with 8/12/16-measure chart crops and horizontal, vertical,
-and half-turn augmentation. The released arranger contains about 3M parameters;
-the rhythm model uses the expanded 16M architecture.
+The current experimental mainline is **ORBIT-8 v2.2 HandFlow**. It retains the
+16M rhythm backbone, applies held-out onset calibration, and trains its arranger
+with scheduled sampling so inference more closely matches training. The released
+arranger contains about 3M parameters. Full-song acceptance then checks hand
+capacity, long-object reservations, slide paths, tails, and irregular hand flow.
 
 ## Pipeline
 
@@ -75,18 +78,20 @@ Generated charts use `SeaLandX feat. ORBIT-8` as the default designer credit.
 
 ## Download And Run
 
-The v2.1 preview currently requires Windows, Python 3.12, and an NVIDIA GPU with
+The v2.2 preview currently requires Windows, Python 3.12, and an NVIDIA GPU with
 a working CUDA 12.8 driver.
 
-1. Download and extract `ORBIT-8-v2.1.0-preview-windows.zip` from
-   [Releases](https://github.com/CaptainLand/ORBIT-8/releases).
-2. Open PowerShell in the extracted folder and install the environment:
+1. Clone this repository or download its source archive.
+2. Download `ORBIT-8-v2.2-models.zip` from
+   [Releases](https://github.com/CaptainLand/ORBIT-8/releases), then copy
+   `orbit_v22_rhythm.pt` and `orbit_v22_arranger.pt` into `v22/releases/`.
+3. Open PowerShell in the project folder and install the environment:
 
 ```powershell
 .\setup_orbit8.ps1
 ```
 
-3. Start the local web interface:
+4. Start the local web interface:
 
 ```powershell
 .\start_maimai_web.ps1
@@ -99,5 +104,5 @@ selection and controls for difficulty, interaction, sweep, and jack intensity.
 
 Training datasets, official chart archives, copyrighted audio, generated songs,
 virtual environments, and intermediate checkpoints are not distributed. The
-release package contains only the inference weights and compact runtime metadata
-required to run ORBIT-8 v2.1.
+release package contains only the inference weights, evaluation report, and
+compact runtime metadata required to run ORBIT-8 v2.2.

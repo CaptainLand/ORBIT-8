@@ -74,7 +74,15 @@ def move_batch(batch: dict) -> dict:
     return {key: value.cuda(non_blocking=True) if torch.is_tensor(value) else value for key, value in batch.items()}
 
 
-def run_epoch(model, loader, optimizer, scaler, args, weights) -> dict[str, float]:
+def run_epoch(
+    model,
+    loader,
+    optimizer,
+    scaler,
+    args,
+    weights,
+    teacher_forcing_ratio: float = 1.0,
+) -> dict[str, float]:
     training = optimizer is not None
     model.train(training)
     totals = Counter()
@@ -84,7 +92,10 @@ def run_epoch(model, loader, optimizer, scaler, args, weights) -> dict[str, floa
             break
         batch = move_batch(raw_batch)
         with torch.set_grad_enabled(training), torch.autocast("cuda", dtype=torch.float16):
-            output = model(batch)
+            if getattr(model, "supports_scheduled_sampling", False):
+                output = model(batch, teacher_forcing_ratio=teacher_forcing_ratio)
+            else:
+                output = model(batch)
             lane_mask = batch["lane_loss_mask"] > 0.5
             slide_mask = (batch["event_type"] == 2) & (batch["mask"] > 0.5)
             lane_loss = F.cross_entropy(output["delta"][lane_mask], batch["target_delta"][lane_mask])
@@ -142,6 +153,14 @@ def run_epoch(model, loader, optimizer, scaler, args, weights) -> dict[str, floa
             predicted_operator = output["operator"][slide_mask].argmax(-1)
             totals["operator_correct"] += int((predicted_operator == batch["target_operator"][slide_mask]).sum())
             totals["operator_count"] += int(slide_mask.sum())
+            predicted_endpoint = output["endpoint"][slide_mask].argmax(-1)
+            predicted_branch = output["branch"][slide_mask].argmax(-1)
+            totals["endpoint_correct"] += int(
+                (predicted_endpoint == batch["target_endpoint"][slide_mask]).sum()
+            )
+            totals["branch_correct"] += int(
+                (predicted_branch == batch["target_branch"][slide_mask]).sum()
+            )
             for operator_id in predicted_operator.detach().cpu().tolist():
                 totals[f"predicted_operator_{OPERATORS[operator_id]}"] += 1
         totals["batches"] += 1
@@ -156,6 +175,8 @@ def run_epoch(model, loader, optimizer, scaler, args, weights) -> dict[str, floa
         "pattern_loss": totals["pattern_loss"] / batches,
         "lane_accuracy": totals["lane_correct"] / max(1, totals["lane_count"]),
         "operator_accuracy": totals["operator_correct"] / max(1, totals["operator_count"]),
+        "endpoint_accuracy": totals["endpoint_correct"] / max(1, totals["operator_count"]),
+        "branch_accuracy": totals["branch_correct"] / max(1, totals["operator_count"]),
         "pattern_accuracy": totals["pattern_correct"] / max(1, totals["pattern_count"]),
         "batches": totals["batches"],
     }
@@ -174,6 +195,18 @@ def run_epoch(model, loader, optimizer, scaler, args, weights) -> dict[str, floa
         pattern: totals[f"pattern_correct_{pattern}"] / max(1, totals[f"pattern_target_{pattern}"])
         for pattern in PATTERN_NAMES
     }
+    result["pattern_precision"] = {
+        pattern: totals[f"pattern_correct_{pattern}"]
+        / max(1, totals[f"predicted_pattern_{pattern}"])
+        for pattern in PATTERN_NAMES
+    }
+    result["pattern_f1"] = {}
+    for pattern in PATTERN_NAMES:
+        precision = result["pattern_precision"][pattern]
+        recall = result["pattern_recall"][pattern]
+        result["pattern_f1"][pattern] = (
+            2.0 * precision * recall / max(1e-12, precision + recall)
+        )
     return result
 
 

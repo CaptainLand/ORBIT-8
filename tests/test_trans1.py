@@ -34,6 +34,19 @@ class Trans1ModelTests(unittest.TestCase):
         self.assertEqual(generated["lane"].shape, (1, 12))
         self.assertTrue(torch.all((generated["lane"] >= 0) & (generated["lane"] < 8)))
 
+    def test_free_running_forward_does_not_depend_on_teacher_tokens(self) -> None:
+        torch.manual_seed(7)
+        model = Trans1Arranger().eval()
+        first = self.batch()
+        second = self.batch()
+        second["target_pattern"] = torch.full_like(second["target_pattern"], 2)
+        second["previous_delta"] = torch.zeros_like(second["previous_delta"])
+        with torch.no_grad():
+            first_output = model(first, teacher_forcing_ratio=0.0)
+            second_output = model(second, teacher_forcing_ratio=0.0)
+        self.assertTrue(torch.equal(first_output["delta"], second_output["delta"]))
+        self.assertTrue(torch.equal(first_output["pattern"], second_output["pattern"]))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -25,6 +25,8 @@ MAX_HAND_SPEED = 3.0
 MAX_FUTURE_REACH_SPEED = 3.25
 MIN_POSTURE_CHANGE_TICKS = 24
 MAX_HAND_FLOW_DROPS = 32
+MAX_PATTERN_RELAXATIONS = 16
+MAX_LONG_OBJECT_SIMPLIFICATIONS = 8
 
 
 @dataclass(frozen=True)
@@ -376,9 +378,14 @@ def optimize_handflow(events: list[GeneratedEvent]) -> tuple[list[GeneratedEvent
     baseline, baseline_failure = search_handflow(events, allow_repair=False)
     working = copy.deepcopy(events)
     dropped = []
+    pattern_relaxed = []
+    long_objects_simplified = []
     optimized = None
     optimized_failure = None
-    for _ in range(MAX_HAND_FLOW_DROPS + 1):
+    repair_limit = (
+        MAX_HAND_FLOW_DROPS + MAX_PATTERN_RELAXATIONS + MAX_LONG_OBJECT_SIMPLIFICATIONS
+    )
+    for _ in range(repair_limit + 1):
         optimized, optimized_failure = search_handflow(working, allow_repair=True)
         if optimized is not None:
             break
@@ -386,16 +393,49 @@ def optimize_handflow(events: list[GeneratedEvent]) -> tuple[list[GeneratedEvent
             (index, event) for index, event in enumerate(working)
             if event.tick == optimized_failure and event.kind == "tap" and event.pattern_type == 0
         ]
-        if not candidates or len(dropped) >= MAX_HAND_FLOW_DROPS:
+        if candidates and len(dropped) < MAX_HAND_FLOW_DROPS:
+            remove_index, event = min(candidates, key=lambda item: item[1].score)
+            dropped.append({
+                "tick": event.tick,
+                "lane": event.lane,
+                "score": round(event.score, 6),
+                "reason": "strict_handflow_failure",
+            })
+            working.pop(remove_index)
+            continue
+        pattern_candidates = [
+            (index, event) for index, event in enumerate(working)
+            if event.tick == optimized_failure and event.kind == "tap" and event.pattern_type != 0
+        ]
+        if pattern_candidates and len(pattern_relaxed) < MAX_PATTERN_RELAXATIONS:
+            relax_index, event = min(pattern_candidates, key=lambda item: item[1].score)
+            pattern_relaxed.append({
+                "tick": event.tick,
+                "lane": event.lane,
+                "score": round(event.score, 6),
+                "from_pattern_type": event.pattern_type,
+                "reason": "infeasible_pattern_handflow",
+            })
+            working[relax_index].pattern_type = 0
+            continue
+        long_candidates = [
+            (index, event) for index, event in enumerate(working)
+            if event.tick == optimized_failure and event.kind in {"hold", "slide"}
+        ]
+        if not long_candidates or len(long_objects_simplified) >= MAX_LONG_OBJECT_SIMPLIFICATIONS:
             break
-        remove_index, event = min(candidates, key=lambda item: item[1].score)
-        dropped.append({
+        simplify_index, event = min(long_candidates, key=lambda item: item[1].score)
+        long_objects_simplified.append({
             "tick": event.tick,
             "lane": event.lane,
             "score": round(event.score, 6),
-            "reason": "strict_handflow_failure",
+            "from_kind": event.kind,
+            "reason": "infeasible_long_object_handflow",
         })
-        working.pop(remove_index)
+        working[simplify_index].kind = "tap"
+        working[simplify_index].duration = 0
+        working[simplify_index].slide_template = None
+        working[simplify_index].pattern_type = 0
     if optimized is None:
         return events, {
             "baseline": _metrics(baseline, baseline_failure),
@@ -403,6 +443,8 @@ def optimize_handflow(events: list[GeneratedEvent]) -> tuple[list[GeneratedEvent
             "optimized": _metrics(optimized, optimized_failure),
             "optimized_failure_events": _failure_events(working, optimized_failure),
             "dropped": dropped,
+            "pattern_relaxed": pattern_relaxed,
+            "long_objects_simplified": long_objects_simplified,
             "applied": False,
         }
     result = copy.deepcopy(working)
@@ -425,5 +467,9 @@ def optimize_handflow(events: list[GeneratedEvent]) -> tuple[list[GeneratedEvent
         "final_assignment": _metrics(final_state, final_failure),
         "changes": changes,
         "dropped": dropped,
-        "applied": bool(optimized.lane_changes or dropped),
+        "pattern_relaxed": pattern_relaxed,
+        "long_objects_simplified": long_objects_simplified,
+        "applied": bool(
+            optimized.lane_changes or dropped or pattern_relaxed or long_objects_simplified
+        ),
     }
