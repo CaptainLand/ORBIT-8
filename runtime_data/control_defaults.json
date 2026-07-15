@@ -1,0 +1,245 @@
+{
+  "source": "train split medians",
+  "levels": [
+    {
+      "level": 12.0,
+      "windows": 106,
+      "density_per_measure": 5.0625,
+      "hold_ratio": 0.10457963089542037,
+      "slide_ratio": 0.08716673573698025,
+      "break_ratio": 0.020513359983168524
+    },
+    {
+      "level": 12.1,
+      "windows": 63,
+      "density_per_measure": 5.354838709677419,
+      "hold_ratio": 0.08196721311475409,
+      "slide_ratio": 0.17117117117117117,
+      "break_ratio": 0.013888888888888888
+    },
+    {
+      "level": 12.2,
+      "windows": 10,
+      "density_per_measure": 4.8125,
+      "hold_ratio": 0.045524691358024685,
+      "slide_ratio": 0.1970486111111111,
+      "break_ratio": 0.05538579067990833
+    },
+    {
+      "level": 12.3,
+      "windows": 40,
+      "density_per_measure": 5.5,
+      "hold_ratio": 0.046156577312266994,
+      "slide_ratio": 0.10063291139240507,
+      "break_ratio": 0.017879948914431672
+    },
+    {
+      "level": 12.4,
+      "windows": 82,
+      "density_per_measure": 6.0,
+      "hold_ratio": 0.06756893755068938,
+      "slide_ratio": 0.07947368421052631,
+      "break_ratio": 0.028381642512077296
+    },
+    {
+      "level": 12.5,
+      "windows": 210,
+      "density_per_measure": 6.125,
+      "hold_ratio": 0.06862745098039216,
+      "slide_ratio": 0.1620405101275319,
+      "break_ratio": 0.025
+    },
+    {
+      "level": 12.6,
+      "windows": 130,
+      "density_per_measure": 6.625,
+      "hold_ratio": 0.07619738751814223,
+      "slide_ratio": 0.1360348249151783,
+      "break_ratio": 0.046801985981308414
+    },
+    {
+      "level": 12.7,
+      "windows": 287,
+      "density_per_measure": 6.125,
+      "hold_ratio": 0.0641025641025641,
+      "slide_ratio": 0.1388888888888889,
+      "break_ratio": 0.027777777777777776
+    },
+    {
+      "level": 12.8,
+      "windows": 255,
+      "density_per_measure": 6.1875,
+      "hold_ratio": 0.07317073170731707,
+      "slide_ratio": 0.12222222222222222,
+      "break_ratio": 0.041379310344827586
+    },
+    {
+      "level": 12.9,
+      "windows": 310,
+      "density_per_measure": 6.4375,
+      "hold_ratio": 0.07715201465201466,
+      "slide_ratio": 0.11355577047066409,
+      "break_ratio": 0.029182989837052177
+    },
+    {
+      "level": 13.0,
+      "windows": 165,
+      "density_per_measure": 6.4375,
+      "hold_ratio": 0.04891304347826087,
+      "slide_ratio": 0.09090909090909091,
+      "break_ratio": 0.023148148148148147
+    },
+    {
+      "level": 13.1,
+      "windows": 41,
+      "density_per_measure": 7.125,
+      "hold_ratio": 0.08928571428571429,
+      "slide_ratio": 0.14685314685314685,
+      "break_ratio": 0.0273972602739726
+    },
+    {
+      "level": 13.2,
+      "windows": 163,
+      "density_per_measure": 6.5625,
+      "hold_ratio": 0.04395604395604396,
+      "slide_ratio": 0.152,
+      "break_ratio": 0.037383177570093455
+    },
+    {
+      "level": 13.3,
+      "windows": 307,
+      "density_per_measure": 6.4375,
+      "hold_ratio": 0.041666666666666664,
+      "slide_ratio": 0.1774193548387097,
+      "break_ratio": 0.026845637583892617
+    },
+    {
+      "level": 13.4,
+      "windows": 268,
+      "density_per_measure": 6.9375,
+      "hold_ratio": 0.04669331395348837,
+      "slide_ratio": 0.1686153846153846,
+      "break_ratio": 0.02919863597612958
+    },
+    {
+      "level": 13.5,
+      "windows": 68,
+      "density_per_measure": 8.28125,
+      "hold_ratio": 0.059326294620412265,
+      "slide_ratio": 0.14534412955465587,
+      "break_ratio": 0.044878785336800606
+    },
+    {
+      "level": 13.6,
+      "windows": 94,
+      "density_per_measure": 8.03125,
+      "hold_ratio": 0.052486663224918254,
+      "slide_ratio": 0.12281404838239579,
+      "break_ratio": 0.016877937615724255
+    },
+    {
+      "level": 13.7,
+      "windows": 265,
+      "density_per_measure": 7.5625,
+      "hold_ratio": 0.055944055944055944,
+      "slide_ratio": 0.125,
+      "break_ratio": 0.033783783783783786
+    },
+    {
+      "level": 13.8,
+      "windows": 282,
+      "density_per_measure": 7.5,
+      "hold_ratio": 0.03519091847265222,
+      "slide_ratio": 0.14747307373653687,
+      "break_ratio": 0.028063635409009767
+    },
+    {
+      "level": 13.9,
+      "windows": 145,
+      "density_per_measure": 8.4375,
+      "hold_ratio": 0.041474654377880185,
+      "slide_ratio": 0.12209302325581395,
+      "break_ratio": 0.02830188679245283
+    },
+    {
+      "level": 14.0,
+      "windows": 153,
+      "density_per_measure": 9.0625,
+      "hold_ratio": 0.04,
+      "slide_ratio": 0.11515151515151516,
+      "break_ratio": 0.021052631578947368
+    },
+    {
+      "level": 14.1,
+      "windows": 52,
+      "density_per_measure": 8.40625,
+      "hold_ratio": 0.05007707369912094,
+      "slide_ratio": 0.11939994569644312,
+      "break_ratio": 0.028601810448249537
+    },
+    {
+      "level": 14.2,
+      "windows": 36,
+      "density_per_measure": 9.53125,
+      "hold_ratio": 0.04108023577529171,
+      "slide_ratio": 0.06972789115646258,
+      "break_ratio": 0.03857886904761905
+    },
+    {
+      "level": 14.3,
+      "windows": 118,
+      "density_per_measure": 8.4375,
+      "hold_ratio": 0.04283991400555818,
+      "slide_ratio": 0.11746295350025548,
+      "break_ratio": 0.03125763125763126
+    },
+    {
+      "level": 14.4,
+      "windows": 76,
+      "density_per_measure": 9.46875,
+      "hold_ratio": 0.05242488943114229,
+      "slide_ratio": 0.11098678601875533,
+      "break_ratio": 0.043533549783549785
+    },
+    {
+      "level": 14.5,
+      "windows": 84,
+      "density_per_measure": 8.625,
+      "hold_ratio": 0.02821939586645469,
+      "slide_ratio": 0.1331453634085213,
+      "break_ratio": 0.027745885954841176
+    },
+    {
+      "level": 14.6,
+      "windows": 37,
+      "density_per_measure": 8.4375,
+      "hold_ratio": 0.02857142857142857,
+      "slide_ratio": 0.10625,
+      "break_ratio": 0.009433962264150943
+    },
+    {
+      "level": 14.7,
+      "windows": 71,
+      "density_per_measure": 7.3125,
+      "hold_ratio": 0.07692307692307693,
+      "slide_ratio": 0.10204081632653061,
+      "break_ratio": 0.014388489208633094
+    },
+    {
+      "level": 14.8,
+      "windows": 108,
+      "density_per_measure": 9.625,
+      "hold_ratio": 0.0390625,
+      "slide_ratio": 0.08182687709230033,
+      "break_ratio": 0.02654919236417034
+    },
+    {
+      "level": 14.9,
+      "windows": 26,
+      "density_per_measure": 7.90625,
+      "hold_ratio": 0.04917884313488709,
+      "slide_ratio": 0.0935782967032967,
+      "break_ratio": 0.004575776526996039
+    }
+  ]
+}

@@ -162,7 +162,7 @@ function displayModelName(value) {
 function renderResult(data) {
   const report = data.report || {};
   const types = report.event_types || {};
-  const modelName = displayModelName(report.web_model || "v1.7.1");
+  const modelName = displayModelName(report.web_model || "v2.1-handflow");
   resultState.innerHTML = `
     <h3 class="result-title">${escapeHtml(data.folder_name)}</h3>
     <p class="model-result">${modelName}</p>

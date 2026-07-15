@@ -1,0 +1,491 @@
+{
+  "source": "maimai_finale_dataset\\prepared_v2\\chart_index_12_15.jsonl",
+  "scope": "all prepared charts across every imported version and data split",
+  "level_range": [
+    12.0,
+    15.0
+  ],
+  "density_definition": "sqrt(mean(notes_in_each_second ** 2)); tap + hold + slide heads",
+  "charts": 451,
+  "versions": {
+    "buddies": 90,
+    "finale": 88,
+    "milk": 122,
+    "orange": 70,
+    "pink": 81
+  },
+  "raw_levels": [
+    {
+      "level": 12.0,
+      "charts": 10,
+      "median_rms_notes_per_second": 4.6062,
+      "mean_rms_notes_per_second": 4.5379,
+      "median_plain_notes_per_second": 3.9294,
+      "p25_rms_notes_per_second": 4.2268,
+      "p75_rms_notes_per_second": 5.0017
+    },
+    {
+      "level": 12.1,
+      "charts": 5,
+      "median_rms_notes_per_second": 4.5246,
+      "mean_rms_notes_per_second": 4.4336,
+      "median_plain_notes_per_second": 4.1102,
+      "p25_rms_notes_per_second": 4.3536,
+      "p75_rms_notes_per_second": 4.6957
+    },
+    {
+      "level": 12.2,
+      "charts": 2,
+      "median_rms_notes_per_second": 4.9281,
+      "mean_rms_notes_per_second": 4.9281,
+      "median_plain_notes_per_second": 4.2341,
+      "p25_rms_notes_per_second": 4.9204,
+      "p75_rms_notes_per_second": 4.9359
+    },
+    {
+      "level": 12.3,
+      "charts": 3,
+      "median_rms_notes_per_second": 4.8599,
+      "mean_rms_notes_per_second": 4.8541,
+      "median_plain_notes_per_second": 4.3817,
+      "p25_rms_notes_per_second": 4.6997,
+      "p75_rms_notes_per_second": 5.0114
+    },
+    {
+      "level": 12.4,
+      "charts": 9,
+      "median_rms_notes_per_second": 4.7867,
+      "mean_rms_notes_per_second": 4.5328,
+      "median_plain_notes_per_second": 4.1449,
+      "p25_rms_notes_per_second": 4.1287,
+      "p75_rms_notes_per_second": 5.0105
+    },
+    {
+      "level": 12.5,
+      "charts": 25,
+      "median_rms_notes_per_second": 4.4272,
+      "mean_rms_notes_per_second": 4.4267,
+      "median_plain_notes_per_second": 3.9677,
+      "p25_rms_notes_per_second": 4.0949,
+      "p75_rms_notes_per_second": 5.1228
+    },
+    {
+      "level": 12.6,
+      "charts": 15,
+      "median_rms_notes_per_second": 4.8721,
+      "mean_rms_notes_per_second": 4.9032,
+      "median_plain_notes_per_second": 4.2564,
+      "p25_rms_notes_per_second": 4.5753,
+      "p75_rms_notes_per_second": 5.2358
+    },
+    {
+      "level": 12.7,
+      "charts": 32,
+      "median_rms_notes_per_second": 4.6449,
+      "mean_rms_notes_per_second": 4.6052,
+      "median_plain_notes_per_second": 4.1771,
+      "p25_rms_notes_per_second": 4.1773,
+      "p75_rms_notes_per_second": 5.2796
+    },
+    {
+      "level": 12.8,
+      "charts": 27,
+      "median_rms_notes_per_second": 4.9077,
+      "mean_rms_notes_per_second": 4.8842,
+      "median_plain_notes_per_second": 4.2764,
+      "p25_rms_notes_per_second": 4.5732,
+      "p75_rms_notes_per_second": 5.3413
+    },
+    {
+      "level": 12.9,
+      "charts": 32,
+      "median_rms_notes_per_second": 5.2188,
+      "mean_rms_notes_per_second": 5.1347,
+      "median_plain_notes_per_second": 4.6617,
+      "p25_rms_notes_per_second": 4.6786,
+      "p75_rms_notes_per_second": 5.5692
+    },
+    {
+      "level": 13.0,
+      "charts": 19,
+      "median_rms_notes_per_second": 5.59,
+      "mean_rms_notes_per_second": 6.0209,
+      "median_plain_notes_per_second": 4.7986,
+      "p25_rms_notes_per_second": 5.1212,
+      "p75_rms_notes_per_second": 5.8741
+    },
+    {
+      "level": 13.1,
+      "charts": 6,
+      "median_rms_notes_per_second": 5.2218,
+      "mean_rms_notes_per_second": 5.1487,
+      "median_plain_notes_per_second": 4.6168,
+      "p25_rms_notes_per_second": 4.5947,
+      "p75_rms_notes_per_second": 5.5884
+    },
+    {
+      "level": 13.2,
+      "charts": 24,
+      "median_rms_notes_per_second": 4.9954,
+      "mean_rms_notes_per_second": 5.1068,
+      "median_plain_notes_per_second": 4.5718,
+      "p25_rms_notes_per_second": 4.7438,
+      "p75_rms_notes_per_second": 5.506
+    },
+    {
+      "level": 13.3,
+      "charts": 33,
+      "median_rms_notes_per_second": 5.1358,
+      "mean_rms_notes_per_second": 5.1082,
+      "median_plain_notes_per_second": 4.6142,
+      "p25_rms_notes_per_second": 4.6767,
+      "p75_rms_notes_per_second": 5.5241
+    },
+    {
+      "level": 13.4,
+      "charts": 32,
+      "median_rms_notes_per_second": 5.3931,
+      "mean_rms_notes_per_second": 5.3646,
+      "median_plain_notes_per_second": 4.8775,
+      "p25_rms_notes_per_second": 5.0235,
+      "p75_rms_notes_per_second": 5.8021
+    },
+    {
+      "level": 13.5,
+      "charts": 9,
+      "median_rms_notes_per_second": 5.6517,
+      "mean_rms_notes_per_second": 5.5885,
+      "median_plain_notes_per_second": 4.9615,
+      "p25_rms_notes_per_second": 5.3455,
+      "p75_rms_notes_per_second": 5.8356
+    },
+    {
+      "level": 13.6,
+      "charts": 11,
+      "median_rms_notes_per_second": 6.4479,
+      "mean_rms_notes_per_second": 6.3953,
+      "median_plain_notes_per_second": 5.8489,
+      "p25_rms_notes_per_second": 5.9856,
+      "p75_rms_notes_per_second": 6.8663
+    },
+    {
+      "level": 13.7,
+      "charts": 27,
+      "median_rms_notes_per_second": 6.0528,
+      "mean_rms_notes_per_second": 5.8177,
+      "median_plain_notes_per_second": 5.3932,
+      "p25_rms_notes_per_second": 5.4714,
+      "p75_rms_notes_per_second": 6.5054
+    },
+    {
+      "level": 13.8,
+      "charts": 33,
+      "median_rms_notes_per_second": 6.3865,
+      "mean_rms_notes_per_second": 6.1093,
+      "median_plain_notes_per_second": 5.6483,
+      "p25_rms_notes_per_second": 5.9257,
+      "p75_rms_notes_per_second": 6.9325
+    },
+    {
+      "level": 13.9,
+      "charts": 21,
+      "median_rms_notes_per_second": 6.9436,
+      "mean_rms_notes_per_second": 6.7894,
+      "median_plain_notes_per_second": 6.1069,
+      "p25_rms_notes_per_second": 6.2144,
+      "p75_rms_notes_per_second": 7.2621
+    },
+    {
+      "level": 14.0,
+      "charts": 16,
+      "median_rms_notes_per_second": 7.0793,
+      "mean_rms_notes_per_second": 8.1677,
+      "median_plain_notes_per_second": 6.2548,
+      "p25_rms_notes_per_second": 6.6929,
+      "p75_rms_notes_per_second": 8.7779
+    },
+    {
+      "level": 14.1,
+      "charts": 5,
+      "median_rms_notes_per_second": 7.3669,
+      "mean_rms_notes_per_second": 7.3523,
+      "median_plain_notes_per_second": 6.708,
+      "p25_rms_notes_per_second": 7.3043,
+      "p75_rms_notes_per_second": 7.7238
+    },
+    {
+      "level": 14.2,
+      "charts": 6,
+      "median_rms_notes_per_second": 7.6677,
+      "mean_rms_notes_per_second": 7.8304,
+      "median_plain_notes_per_second": 6.9165,
+      "p25_rms_notes_per_second": 7.1336,
+      "p75_rms_notes_per_second": 8.2921
+    },
+    {
+      "level": 14.3,
+      "charts": 9,
+      "median_rms_notes_per_second": 7.7175,
+      "mean_rms_notes_per_second": 7.558,
+      "median_plain_notes_per_second": 6.7063,
+      "p25_rms_notes_per_second": 6.6321,
+      "p75_rms_notes_per_second": 8.011
+    },
+    {
+      "level": 14.4,
+      "charts": 7,
+      "median_rms_notes_per_second": 7.5933,
+      "mean_rms_notes_per_second": 7.6259,
+      "median_plain_notes_per_second": 6.754,
+      "p25_rms_notes_per_second": 7.3407,
+      "p75_rms_notes_per_second": 7.8296
+    },
+    {
+      "level": 14.5,
+      "charts": 8,
+      "median_rms_notes_per_second": 7.6229,
+      "mean_rms_notes_per_second": 7.8741,
+      "median_plain_notes_per_second": 7.0773,
+      "p25_rms_notes_per_second": 7.1178,
+      "p75_rms_notes_per_second": 8.3372
+    },
+    {
+      "level": 14.6,
+      "charts": 6,
+      "median_rms_notes_per_second": 7.978,
+      "mean_rms_notes_per_second": 8.1975,
+      "median_plain_notes_per_second": 7.1003,
+      "p25_rms_notes_per_second": 7.736,
+      "p75_rms_notes_per_second": 8.4526
+    },
+    {
+      "level": 14.7,
+      "charts": 5,
+      "median_rms_notes_per_second": 7.9603,
+      "mean_rms_notes_per_second": 8.0774,
+      "median_plain_notes_per_second": 6.7167,
+      "p25_rms_notes_per_second": 7.9239,
+      "p75_rms_notes_per_second": 8.119
+    },
+    {
+      "level": 14.8,
+      "charts": 9,
+      "median_rms_notes_per_second": 8.7902,
+      "mean_rms_notes_per_second": 8.8025,
+      "median_plain_notes_per_second": 7.5241,
+      "p25_rms_notes_per_second": 8.2976,
+      "p75_rms_notes_per_second": 9.1096
+    },
+    {
+      "level": 14.9,
+      "charts": 4,
+      "median_rms_notes_per_second": 9.0172,
+      "mean_rms_notes_per_second": 8.9582,
+      "median_plain_notes_per_second": 7.3559,
+      "p25_rms_notes_per_second": 8.7053,
+      "p75_rms_notes_per_second": 9.2702
+    },
+    {
+      "level": 15.0,
+      "charts": 1,
+      "median_rms_notes_per_second": 10.1905,
+      "mean_rms_notes_per_second": 10.1905,
+      "median_plain_notes_per_second": 8.6944,
+      "p25_rms_notes_per_second": 10.1905,
+      "p75_rms_notes_per_second": 10.1905
+    }
+  ],
+  "profile": [
+    {
+      "level": 12.0,
+      "rms_notes_per_second": 4.5725,
+      "exact_charts": 10,
+      "nearby_charts": 17
+    },
+    {
+      "level": 12.1,
+      "rms_notes_per_second": 4.5908,
+      "exact_charts": 5,
+      "nearby_charts": 20
+    },
+    {
+      "level": 12.2,
+      "rms_notes_per_second": 4.6165,
+      "exact_charts": 2,
+      "nearby_charts": 29
+    },
+    {
+      "level": 12.3,
+      "rms_notes_per_second": 4.6516,
+      "exact_charts": 3,
+      "nearby_charts": 44
+    },
+    {
+      "level": 12.4,
+      "rms_notes_per_second": 4.6971,
+      "exact_charts": 9,
+      "nearby_charts": 54
+    },
+    {
+      "level": 12.5,
+      "rms_notes_per_second": 4.7538,
+      "exact_charts": 25,
+      "nearby_charts": 84
+    },
+    {
+      "level": 12.6,
+      "rms_notes_per_second": 4.8212,
+      "exact_charts": 15,
+      "nearby_charts": 108
+    },
+    {
+      "level": 12.7,
+      "rms_notes_per_second": 4.8981,
+      "exact_charts": 32,
+      "nearby_charts": 131
+    },
+    {
+      "level": 12.8,
+      "rms_notes_per_second": 4.9813,
+      "exact_charts": 27,
+      "nearby_charts": 125
+    },
+    {
+      "level": 12.9,
+      "rms_notes_per_second": 5.0662,
+      "exact_charts": 32,
+      "nearby_charts": 116
+    },
+    {
+      "level": 13.0,
+      "rms_notes_per_second": 5.1484,
+      "exact_charts": 19,
+      "nearby_charts": 108
+    },
+    {
+      "level": 13.1,
+      "rms_notes_per_second": 5.2267,
+      "exact_charts": 6,
+      "nearby_charts": 114
+    },
+    {
+      "level": 13.2,
+      "rms_notes_per_second": 5.3073,
+      "exact_charts": 24,
+      "nearby_charts": 114
+    },
+    {
+      "level": 13.3,
+      "rms_notes_per_second": 5.4027,
+      "exact_charts": 33,
+      "nearby_charts": 104
+    },
+    {
+      "level": 13.4,
+      "rms_notes_per_second": 5.5262,
+      "exact_charts": 32,
+      "nearby_charts": 109
+    },
+    {
+      "level": 13.5,
+      "rms_notes_per_second": 5.6842,
+      "exact_charts": 9,
+      "nearby_charts": 112
+    },
+    {
+      "level": 13.6,
+      "rms_notes_per_second": 5.8725,
+      "exact_charts": 11,
+      "nearby_charts": 112
+    },
+    {
+      "level": 13.7,
+      "rms_notes_per_second": 6.08,
+      "exact_charts": 27,
+      "nearby_charts": 101
+    },
+    {
+      "level": 13.8,
+      "rms_notes_per_second": 6.2961,
+      "exact_charts": 33,
+      "nearby_charts": 108
+    },
+    {
+      "level": 13.9,
+      "rms_notes_per_second": 6.5167,
+      "exact_charts": 21,
+      "nearby_charts": 102
+    },
+    {
+      "level": 14.0,
+      "rms_notes_per_second": 6.7431,
+      "exact_charts": 16,
+      "nearby_charts": 81
+    },
+    {
+      "level": 14.1,
+      "rms_notes_per_second": 6.9775,
+      "exact_charts": 5,
+      "nearby_charts": 57
+    },
+    {
+      "level": 14.2,
+      "rms_notes_per_second": 7.2169,
+      "exact_charts": 6,
+      "nearby_charts": 43
+    },
+    {
+      "level": 14.3,
+      "rms_notes_per_second": 7.4514,
+      "exact_charts": 9,
+      "nearby_charts": 35
+    },
+    {
+      "level": 14.4,
+      "rms_notes_per_second": 7.6686,
+      "exact_charts": 7,
+      "nearby_charts": 36
+    },
+    {
+      "level": 14.5,
+      "rms_notes_per_second": 7.8625,
+      "exact_charts": 8,
+      "nearby_charts": 35
+    },
+    {
+      "level": 14.6,
+      "rms_notes_per_second": 8.035,
+      "exact_charts": 6,
+      "nearby_charts": 35
+    },
+    {
+      "level": 14.7,
+      "rms_notes_per_second": 8.191,
+      "exact_charts": 5,
+      "nearby_charts": 32
+    },
+    {
+      "level": 14.8,
+      "rms_notes_per_second": 8.3332,
+      "exact_charts": 9,
+      "nearby_charts": 25
+    },
+    {
+      "level": 14.9,
+      "rms_notes_per_second": 8.4622,
+      "exact_charts": 4,
+      "nearby_charts": 19
+    },
+    {
+      "level": 15.0,
+      "rms_notes_per_second": 8.5783,
+      "exact_charts": 1,
+      "nearby_charts": 14
+    }
+  ],
+  "summary": {
+    "median_chart_rms_notes_per_second": 5.5093,
+    "min_chart_rms_notes_per_second": 1.7524,
+    "max_chart_rms_notes_per_second": 14.4225
+  }
+}

@@ -23,6 +23,7 @@ Thumbs.db
 *.pth
 *.ckpt
 *.onnx
+runtime_data/*.joblib
 **/runs/
 **/releases/
 **/checkpoints/
@@ -48,6 +49,7 @@ maimai_finale_dataset/
 generated_maimai/
 immaculate_maimai/
 timestamp/
+release/
 output/
 **/output/
 2350138 penoreri - Immaculate/
