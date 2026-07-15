@@ -1,0 +1,26 @@
+{
+  "checkpoint": "D:\\trans\\v2\\runs\\orbit_v2_hierarchical_v1\\best.pt",
+  "checkpoint_epoch": 9,
+  "split": "test",
+  "windows": 496,
+  "metrics": {
+    "loss": 1.451287978887558,
+    "event_loss": 0.256007866114378,
+    "count_loss": 0.5988158112764359,
+    "onset_loss": 0.6068439418077469,
+    "subdivision_loss": 1.9030217283964157,
+    "accent_loss": 0.08107509858906269,
+    "count_accuracy": 0.9731695956294507,
+    "subdivision_accuracy": 0.6235364254202933,
+    "dense_precision": 0.7324693358018977,
+    "dense_recall": 0.5731100045269353,
+    "dense_f1": 0.6430639508304973,
+    "batches": 50,
+    "event_precision": 0.3380464106725094,
+    "event_recall": 0.2944993488770359,
+    "event_f1": 0.31477390000738853,
+    "onset_precision_t2": 0.6649216499191904,
+    "onset_recall_t2": 0.789259645464025,
+    "onset_f1_t2": 0.7217749634694306
+  }
+}

@@ -1,0 +1,61 @@
+# Python environments and caches
+.venv*/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local tooling and logs
+.agents/
+.generator_uploads/
+.tmp-pip/
+*.log
+.server-*.log
+.DS_Store
+Thumbs.db
+
+# Model checkpoints and training runs
+*.pt
+*.pth
+*.ckpt
+*.onnx
+**/runs/
+**/releases/
+**/checkpoints/
+
+# Audio, archives, and source chart packages
+*.mp3
+*.wav
+*.ogg
+*.flac
+*.aac
+*.m4a
+*.zip
+*.osz
+
+# Datasets and prepared features
+maimai_finale_dataset/
+**/prepared/
+**/prepared_v*/
+**/features/
+**/dataset_cache/
+
+# Generated charts and local song workspaces
+generated_maimai/
+immaculate_maimai/
+timestamp/
+output/
+**/output/
+2350138 penoreri - Immaculate/
+flicker/
+
+# External reference repositories are not redistributed
+references/
+
+# Local editor settings
+.idea/
+.vscode/

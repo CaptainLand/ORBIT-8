@@ -1,0 +1,30 @@
+{
+  "checkpoint": "v2\\runs\\orbit_v2_16m_calibrated\\best.pt",
+  "checkpoint_epoch": 1,
+  "parameters": 15910098,
+  "split": "test",
+  "windows": 496,
+  "metrics": {
+    "loss": 1.3191828296845218,
+    "event_loss": 0.2295661105000111,
+    "count_loss": 0.528712834938463,
+    "onset_loss": 0.5879165842590561,
+    "subdivision_loss": 1.6996607435754982,
+    "accent_loss": 0.07863841708525117,
+    "distill_event": 0.0,
+    "distill_count": 0.0,
+    "distill_onset": 0.0,
+    "count_accuracy": 0.9724156442928646,
+    "subdivision_accuracy": 0.6232979611303208,
+    "dense_precision": 0.7076213439563895,
+    "dense_recall": 0.6111362607514712,
+    "dense_f1": 0.6558492032646716,
+    "batches": 83,
+    "event_precision": 0.33147528285706385,
+    "event_recall": 0.32063346236866047,
+    "event_f1": 0.32596424571887145,
+    "onset_precision_t2": 0.6517478003872678,
+    "onset_recall_t2": 0.800208550573514,
+    "onset_f1_t2": 0.7183882109710314
+  }
+}

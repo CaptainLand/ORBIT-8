@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ORBIT-8 by SeaLandX</title>
+  <link rel="stylesheet" href="/assets/app.css?v=v2-16m">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>ORBIT-8</h1>
+      <p class="path">Neural Maimai Chart Engine by SeaLandX</p>
+    </div>
+    <div class="server-state"><span id="stateDot"></span><span id="serverState">连接中</span></div>
+  </header>
+
+  <main class="workspace">
+    <form id="generatorForm" class="generator-panel">
+      <section class="audio-section">
+        <div class="section-heading">
+          <h2>音频</h2>
+          <span id="fileMeta">MP3</span>
+        </div>
+        <label class="dropzone" id="dropzone" for="audioInput">
+          <input id="audioInput" name="audio" type="file" accept="audio/mpeg,.mp3" required>
+          <span class="drop-symbol">+</span>
+          <strong id="dropTitle">选择或拖入 MP3</strong>
+          <span id="dropDetail">未选择文件</span>
+        </label>
+      </section>
+
+      <section class="settings-section">
+        <div class="section-heading"><h2>谱面参数</h2></div>
+        <fieldset class="model-selector">
+          <legend>生成模型</legend>
+          <label>
+            <input type="radio" name="model" value="v1.7.1" checked>
+            <span><strong>v1.7.1</strong><small>稳定版</small></span>
+          </label>
+          <label>
+            <input type="radio" name="model" value="trans-02">
+            <span><strong>Trans-02</strong><small>Transformer 采音 + 排键</small></span>
+          </label>
+          <label>
+            <input type="radio" name="model" value="v2">
+            <span><strong>ORBIT-8 v2</strong><small>分层节奏与重音规划</small></span>
+          </label>
+          <label>
+            <input type="radio" name="model" value="v2-16m">
+            <span><strong>ORBIT-8 v2 16M</strong><small>高容量校准模型</small></span>
+          </label>
+          <label>
+            <input type="radio" name="model" value="v2.1-handflow">
+            <span><strong>ORBIT-8 v2.1 HandFlow</strong><small>动态排键与严格双手手顺</small></span>
+          </label>
+        </fieldset>
+        <div class="field-grid">
+          <label class="field wide">
+            <span>歌曲名</span>
+            <input id="titleInput" name="title" type="text" maxlength="100" required>
+          </label>
+          <label class="field wide">
+            <span>曲师</span>
+            <input name="artist" type="text" maxlength="100" value="Unknown">
+          </label>
+          <label class="field">
+            <span>BPM</span>
+            <input id="bpmInput" name="bpm" type="number" min="30" max="400" step="0.001" value="200" required>
+          </label>
+          <label class="field">
+            <span>Offset（秒）</span>
+            <input id="offsetInput" name="offset" type="number" min="-10" max="60" step="0.001" value="0" required>
+          </label>
+          <label class="timing-toggle wide">
+            <input id="autoTiming" type="checkbox" checked>
+            <span>Auto BPM / Offset</span>
+          </label>
+        </div>
+
+        <div class="control-group difficulty-control">
+          <div class="control-heading">
+            <span>目标难度</span>
+            <span class="density-value" id="densityValue">正在读取密度</span>
+          </div>
+          <div class="difficulty-row">
+            <span class="range-edge">12.0</span>
+            <input id="levelRange" aria-label="目标难度" type="range" min="12" max="15" step="0.1" value="12.0">
+            <input id="levelNumber" name="level" aria-label="精确难度" type="number" min="12" max="15" step="0.1" value="12.0" required>
+          </div>
+          <div class="density-readout">
+            <span>基于全版本官谱的每秒 RMS 采音密度</span>
+            <span id="densitySamples"></span>
+          </div>
+        </div>
+
+        <div class="control-group pattern-controls">
+          <div class="control-heading"><span>配置热度</span><small>可拖动调整，100% 为模型基准</small></div>
+          <label class="heat-row" for="interactionHeat">
+            <span>交互</span>
+            <input id="interactionHeat" name="interaction_heat" type="range" min="0" max="2" step="0.1" value="1">
+            <output for="interactionHeat">100%</output>
+          </label>
+          <label class="heat-row" for="sweepHeat">
+            <span>扫键</span>
+            <input id="sweepHeat" name="sweep_heat" type="range" min="0" max="2" step="0.1" value="0.7">
+            <output for="sweepHeat">70%</output>
+          </label>
+          <label class="heat-row" for="jackHeat">
+            <span>纵连</span>
+            <input id="jackHeat" name="jack_heat" type="range" min="0" max="2" step="0.1" value="1">
+            <output for="jackHeat">100%</output>
+          </label>
+        </div>
+
+        <details class="advanced">
+          <summary>高级参数</summary>
+          <div class="field-grid advanced-grid">
+            <label class="field">
+              <span>采样步数</span>
+              <input name="steps" type="number" min="10" max="100" step="1" value="50">
+            </label>
+            <label class="field">
+              <span>控制强度</span>
+              <input name="guidance" type="number" min="0.5" max="3" step="0.05" value="1.25">
+            </label>
+            <label class="field wide">
+              <span>Seed</span>
+              <input name="seed" type="number" step="1" value="20260701">
+            </label>
+          </div>
+        </details>
+      </section>
+
+      <div class="actionbar">
+        <span id="formMessage"></span>
+        <button id="generateButton" type="submit">开始生成</button>
+      </div>
+    </form>
+
+    <aside class="result-panel">
+      <section class="current-result">
+        <div class="section-heading"><h2>本次生成</h2><span id="elapsed"></span></div>
+        <div id="idleState" class="empty-state">
+          <div class="meter"><span></span><span></span><span></span><span></span></div>
+          <p>等待任务</p>
+        </div>
+        <div id="workingState" class="working-state hidden">
+          <div class="spinner"></div>
+          <strong id="workingTitle">正在生成</strong>
+          <p id="workingDetail">准备音频特征</p>
+        </div>
+        <div id="resultState" class="result-state hidden"></div>
+      </section>
+
+      <section class="history-section">
+        <div class="section-heading"><h2>最近输出</h2><button id="refreshButton" class="quiet-button" type="button">刷新</button></div>
+        <div id="historyList" class="history-list"></div>
+      </section>
+    </aside>
+  </main>
+
+  <script src="/assets/app.js?v=v2-1-handflow"></script>
+</body>
+</html>

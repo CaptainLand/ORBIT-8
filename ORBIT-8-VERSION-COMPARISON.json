@@ -1,0 +1,213 @@
+{
+  "benchmark": {
+    "song": "B.M.S.",
+    "level": 12.6,
+    "official_events": 436,
+    "official_unique_onsets": 322,
+    "matching": "greedy one-to-one onset matching",
+    "pattern_definitions": {
+      "interaction": "alternating lanes at 12-tick (16th-note) spacing",
+      "jack": "one lane at 12-tick (16th-note) spacing",
+      "sweep": "continuous lanes at 12/8/6-tick (16th/24th/32nd) spacing",
+      "eighth_notes": "24-tick spacing is never a configuration"
+    }
+  },
+  "versions": {
+    "v1": {
+      "folder": "D:\\trans\\output\\B.M.S. Strict Hand-Safe",
+      "bpm": 199.978,
+      "offset_seconds": 0.0,
+      "events": 433,
+      "event_count_error": -3,
+      "unique_onsets": 377,
+      "types": {
+        "tap": 355,
+        "slide": 65,
+        "hold": 13
+      },
+      "onset_20ms": {
+        "matched": 224,
+        "precision": 0.594164,
+        "recall": 0.695652,
+        "f1": 0.640916
+      },
+      "onset_30ms": {
+        "matched": 224,
+        "precision": 0.594164,
+        "recall": 0.695652,
+        "f1": 0.640916
+      },
+      "onset_50ms": {
+        "matched": 224,
+        "precision": 0.594164,
+        "recall": 0.695652,
+        "f1": 0.640916
+      },
+      "patterns": {
+        "none": 426,
+        "jack": 7
+      },
+      "pattern_segments": {
+        "jack": 1
+      },
+      "max_simultaneous": 2,
+      "peak_heads_1s": 11,
+      "peak_non_sweep_heads_1s": 11,
+      "sub_16th_gaps": 0,
+      "minimum_gap_ticks": 12,
+      "invalid_slides": 0,
+      "same_lane_inside_hold": 0,
+      "hand_capacity_removed": 24,
+      "rhythm_fast_notes_removed": 0,
+      "terminator_valid": true
+    },
+    "v1.5": {
+      "folder": "D:\\trans\\output\\B.M.S. ORBIT-8 v1.5",
+      "bpm": 200.0,
+      "offset_seconds": 0.0,
+      "events": 441,
+      "event_count_error": 5,
+      "unique_onsets": 412,
+      "types": {
+        "tap": 355,
+        "slide": 52,
+        "hold": 34
+      },
+      "onset_20ms": {
+        "matched": 229,
+        "precision": 0.555825,
+        "recall": 0.71118,
+        "f1": 0.623978
+      },
+      "onset_30ms": {
+        "matched": 229,
+        "precision": 0.555825,
+        "recall": 0.71118,
+        "f1": 0.623978
+      },
+      "onset_50ms": {
+        "matched": 229,
+        "precision": 0.555825,
+        "recall": 0.71118,
+        "f1": 0.623978
+      },
+      "patterns": {
+        "none": 387,
+        "sweep": 43,
+        "jack": 11
+      },
+      "pattern_segments": {
+        "sweep": 4,
+        "jack": 1
+      },
+      "max_simultaneous": 2,
+      "peak_heads_1s": 15,
+      "peak_non_sweep_heads_1s": 12,
+      "sub_16th_gaps": 0,
+      "minimum_gap_ticks": 12,
+      "invalid_slides": 0,
+      "same_lane_inside_hold": 0,
+      "hand_capacity_removed": 21,
+      "rhythm_fast_notes_removed": 0,
+      "terminator_valid": true
+    },
+    "v1.6": {
+      "folder": "D:\\trans\\output\\B.M.S. ORBIT-8 v1.6",
+      "bpm": 200.0,
+      "offset_seconds": 0.0,
+      "events": 438,
+      "event_count_error": 2,
+      "unique_onsets": 410,
+      "types": {
+        "tap": 353,
+        "slide": 51,
+        "hold": 34
+      },
+      "onset_20ms": {
+        "matched": 227,
+        "precision": 0.553659,
+        "recall": 0.704969,
+        "f1": 0.620219
+      },
+      "onset_30ms": {
+        "matched": 227,
+        "precision": 0.553659,
+        "recall": 0.704969,
+        "f1": 0.620219
+      },
+      "onset_50ms": {
+        "matched": 227,
+        "precision": 0.553659,
+        "recall": 0.704969,
+        "f1": 0.620219
+      },
+      "patterns": {
+        "none": 409,
+        "interaction": 29
+      },
+      "pattern_segments": {
+        "interaction": 3
+      },
+      "max_simultaneous": 2,
+      "peak_heads_1s": 15,
+      "peak_non_sweep_heads_1s": 15,
+      "sub_16th_gaps": 0,
+      "minimum_gap_ticks": 12,
+      "invalid_slides": 0,
+      "same_lane_inside_hold": 0,
+      "hand_capacity_removed": 24,
+      "rhythm_fast_notes_removed": 0,
+      "terminator_valid": true
+    },
+    "v1.7": {
+      "folder": "D:\\trans\\output\\B.M.S. ORBIT-8 v1.7 final",
+      "bpm": 200.0,
+      "offset_seconds": 0.0,
+      "events": 468,
+      "event_count_error": 32,
+      "unique_onsets": 418,
+      "types": {
+        "hold": 35,
+        "tap": 377,
+        "slide": 56
+      },
+      "onset_20ms": {
+        "matched": 236,
+        "precision": 0.564593,
+        "recall": 0.732919,
+        "f1": 0.637838
+      },
+      "onset_30ms": {
+        "matched": 236,
+        "precision": 0.564593,
+        "recall": 0.732919,
+        "f1": 0.637838
+      },
+      "onset_50ms": {
+        "matched": 237,
+        "precision": 0.566986,
+        "recall": 0.736025,
+        "f1": 0.640541
+      },
+      "patterns": {
+        "none": 431,
+        "interaction": 27,
+        "sweep": 10
+      },
+      "pattern_segments": {
+        "interaction": 3,
+        "sweep": 1
+      },
+      "max_simultaneous": 2,
+      "peak_heads_1s": 14,
+      "peak_non_sweep_heads_1s": 14,
+      "sub_16th_gaps": 0,
+      "minimum_gap_ticks": 12,
+      "invalid_slides": 0,
+      "same_lane_inside_hold": 0,
+      "hand_capacity_removed": 18,
+      "rhythm_fast_notes_removed": 0,
+      "terminator_valid": true
+    }
+  }
+}
