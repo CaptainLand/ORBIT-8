@@ -61,7 +61,16 @@ def set_inherited_trainable(model: OrbitV2RhythmModel16M, enabled: bool) -> None
             parameter.requires_grad_(enabled)
 
 
-def run_epoch(model, loader, optimizer, scaler, args, teacher=None) -> dict[str, float]:
+def run_epoch(
+    model,
+    loader,
+    optimizer,
+    scaler,
+    args,
+    teacher=None,
+    distill_scale: float = 1.0,
+    distill_confidence: float = 0.0,
+) -> dict[str, float]:
     training = optimizer is not None
     model.train(training)
     if teacher is not None:
@@ -133,24 +142,31 @@ def run_epoch(model, loader, optimizer, scaler, args, teacher=None) -> dict[str,
                 event_distill_raw = F.binary_cross_entropy_with_logits(
                     output["event"], event_teacher, reduction="none"
                 )
-                distill_event = (event_distill_raw * valid_ticks[:, None]).sum() / (
-                    valid_ticks.sum() * 5
-                ).clamp_min(1)
+                event_confidence = (event_teacher - 0.5).abs() * 2.0
+                event_mask = valid_ticks[:, None] & (event_confidence >= distill_confidence)
+                distill_event = (event_distill_raw * event_mask).sum() / event_mask.sum().clamp_min(1)
+                teacher_count_probability = F.softmax(teacher_output["count"], dim=1)
                 count_distill_raw = F.kl_div(
                     F.log_softmax(output["count"], dim=1),
-                    F.softmax(teacher_output["count"], dim=1),
+                    teacher_count_probability,
                     reduction="none",
                 ).sum(dim=1)
-                distill_count = (count_distill_raw * valid_ticks).sum() / valid_ticks.sum().clamp_min(1)
-                onset_distill_raw = F.binary_cross_entropy_with_logits(
-                    output["onset"][:, 0], torch.sigmoid(teacher_output["onset"][:, 0]), reduction="none"
+                count_mask = valid_ticks & (
+                    teacher_count_probability.max(dim=1).values >= distill_confidence
                 )
-                distill_onset = (onset_distill_raw * valid_ticks).sum() / valid_ticks.sum().clamp_min(1)
+                distill_count = (count_distill_raw * count_mask).sum() / count_mask.sum().clamp_min(1)
+                teacher_onset = torch.sigmoid(teacher_output["onset"][:, 0])
+                onset_distill_raw = F.binary_cross_entropy_with_logits(
+                    output["onset"][:, 0], teacher_onset, reduction="none"
+                )
+                onset_confidence = (teacher_onset - 0.5).abs() * 2.0
+                onset_mask = valid_ticks & (onset_confidence >= distill_confidence)
+                distill_onset = (onset_distill_raw * onset_mask).sum() / onset_mask.sum().clamp_min(1)
             loss = (
                 supervised_loss
-                + getattr(args, "distill_event_weight", 0.20) * distill_event
-                + getattr(args, "distill_count_weight", 0.10) * distill_count
-                + getattr(args, "distill_onset_weight", 0.15) * distill_onset
+                + distill_scale * getattr(args, "distill_event_weight", 0.20) * distill_event
+                + distill_scale * getattr(args, "distill_count_weight", 0.10) * distill_count
+                + distill_scale * getattr(args, "distill_onset_weight", 0.15) * distill_onset
             )
 
         if training:
@@ -176,8 +192,13 @@ def run_epoch(model, loader, optimizer, scaler, args, teacher=None) -> dict[str,
             ("distill_count", distill_count), ("distill_onset", distill_onset),
         ):
             totals[name] += float(value.detach())
-        totals["count_correct"] += int(((output["count"].argmax(1) == count_target) & valid_ticks).sum())
+        predicted_count = output["count"].argmax(1)
+        totals["count_correct"] += int(((predicted_count == count_target) & valid_ticks).sum())
         totals["count_total"] += int(valid_ticks.sum())
+        totals["note_count_abs_error"] += int(
+            ((predicted_count - count_target).abs() * valid_ticks).sum()
+        )
+        totals["note_count_target"] += int((count_target * valid_ticks).sum())
         totals["subdivision_correct"] += int(((predicted_subdivision == subdivision_target) & chart_onset).sum())
         totals["subdivision_total"] += int(chart_onset.sum())
         totals["dense_tp"] += int((dense_expected & dense_predicted).sum())
@@ -202,6 +223,8 @@ def run_epoch(model, loader, optimizer, scaler, args, teacher=None) -> dict[str,
         "dense_precision": dense_precision,
         "dense_recall": dense_recall,
         "dense_f1": 2 * dense_precision * dense_recall / max(1e-12, dense_precision + dense_recall),
+        "note_count_relative_error": totals["note_count_abs_error"]
+        / max(1, totals["note_count_target"]),
         "batches": totals["batches"],
     })
     result.update(event_metrics.result())

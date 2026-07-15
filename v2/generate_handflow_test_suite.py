@@ -66,6 +66,8 @@ def summarize(song: dict, report: dict) -> dict:
         "max_normalized_hand_speed": final.get("max_normalized_hand_speed"),
         "lane_changes": len(handflow.get("changes", [])),
         "handflow_dropped": len(handflow.get("dropped", [])),
+        "handflow_pattern_relaxed": len(handflow.get("pattern_relaxed", [])),
+        "handflow_long_objects_simplified": len(handflow.get("long_objects_simplified", [])),
         "jack_pattern_share": report.get("jack_pattern_share"),
         "jack_pattern_max_share": report.get("jack_pattern_max_share"),
         "long_eighth_repositioned": report.get("long_eighth_repositioned"),

@@ -2,8 +2,8 @@ $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
 
 $pythonCandidates = @(
-    ".\.venv\Scripts\python.exe",
-    ".\.venv-maimai-ai\Scripts\python.exe"
+    ".\.venv-maimai-ai\Scripts\python.exe",
+    ".\.venv\Scripts\python.exe"
 )
 $python = $pythonCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
 if (-not $python) {
@@ -13,6 +13,8 @@ if (-not $python) {
 $requiredFiles = @(
     ".\v2\releases\orbit_v2_16m_calibrated.pt",
     ".\trans1\releases\trans1_dynamic_v2.pt",
+    ".\v22\releases\orbit_v22_rhythm.pt",
+    ".\v22\releases\orbit_v22_arranger.pt",
     ".\runtime_data\bpm_ranker.joblib"
 )
 $missing = $requiredFiles | Where-Object { -not (Test-Path $_) }

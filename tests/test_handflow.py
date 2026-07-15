@@ -66,6 +66,31 @@ class HandFlowTests(unittest.TestCase):
         self.assertEqual(len(report["dropped"]), 1)
         self.assertEqual(len(optimized), 2)
 
+    def test_infeasible_sweep_note_is_relaxed_before_repair(self):
+        events = [
+            GeneratedEvent(
+                tick=0,
+                lane=4,
+                kind="hold",
+                score=1.0,
+                duration=96,
+                pattern_type=PATTERN_SWEEP,
+            ),
+            GeneratedEvent(
+                tick=24,
+                lane=4,
+                kind="tap",
+                score=0.2,
+                pattern_type=PATTERN_SWEEP,
+            ),
+        ]
+        optimized, report = optimize_handflow(events)
+        self.assertTrue(report["final_assignment"]["feasible"])
+        self.assertEqual(len(report["pattern_relaxed"]), 1)
+        self.assertEqual(report["dropped"], [])
+        self.assertEqual(optimized[1].pattern_type, 0)
+        self.assertNotEqual(optimized[1].lane, 4)
+
 
 if __name__ == "__main__":
     unittest.main()
