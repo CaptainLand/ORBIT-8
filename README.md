@@ -2,6 +2,11 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
+> [!IMPORTANT]
+> **Source preview only:** model checkpoints and training data are not included.
+> This repository cannot generate charts out of the box. A downloadable
+> inference package and properly licensed weights will be provided separately.
+
 **Neural maimai chart engine by SeaLandX.**
 
 ORBIT-8 converts an MP3 and a target difficulty into a FiNALE-compatible chart
