@@ -35,13 +35,14 @@ from maimai_ai.patterns import (
 from prepare_audio_features import TARGET_SAMPLE_RATE, decode_mono
 
 
-ROOT = Path(r"D:\trans")
+ROOT = Path(__file__).resolve().parent
+RUNTIME_DATA = ROOT / "runtime_data"
 ENGINE_NAME = "ORBIT-8"
 ENGINE_VERSION = "v1.7.1"
 ENGINE_CREATOR = "SeaLandX"
-PREPARED = ROOT / "maimai_finale_dataset" / "prepared_v2"
-STAR_CATALOG = ROOT / "maimai_finale_dataset" / "prepared_v1" / "star_catalog.json"
-AUDIO_CONFIG = ROOT / "maimai_finale_dataset" / "prepared_audio_orbit_v15" / "config.json"
+PREPARED = RUNTIME_DATA
+STAR_CATALOG = RUNTIME_DATA / "star_catalog.json"
+AUDIO_CONFIG = RUNTIME_DATA / "audio_config.json"
 CHECKPOINT = ROOT / "maimai_audio_diffusion" / "runs" / "finale_mug_maimai_v3" / "best.pt"
 VAE_CHECKPOINT = ROOT / "maimai_vae" / "runs" / "finale_vae_v1" / "best.pt"
 ARRANGER_CHECKPOINT = ROOT / "maimai_arranger" / "runs" / "orbit_v171_arranger" / "best.pt"

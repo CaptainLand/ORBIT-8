@@ -10,7 +10,8 @@ import numpy as np
 
 SAMPLE_RATE = 22050
 HOP_LENGTH = 256
-MODEL_PATH = Path(r"D:\trans\maimai_finale_dataset\bpm_ranker.joblib")
+ROOT = Path(__file__).resolve().parents[1]
+MODEL_PATH = ROOT / "runtime_data" / "bpm_ranker.joblib"
 FEATURE_NAMES = [
     "bpm_scaled",
     "log_bpm",

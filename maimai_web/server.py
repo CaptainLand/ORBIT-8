@@ -16,19 +16,14 @@ from fastapi.staticfiles import StaticFiles
 from maimai_ai.audio_analysis import analyze_audio
 
 
-ROOT = Path(r"D:\trans")
+ROOT = Path(__file__).resolve().parents[1]
 WEB_ROOT = ROOT / "maimai_web"
 OUTPUT_ROOT = ROOT / "output"
 UPLOAD_ROOT = ROOT / ".generator_uploads"
-GENERATOR = ROOT / "generate_maimai.py"
 MODEL_COMMANDS = {
-    "v1.7.1": (str(GENERATOR),),
-    "trans-02": ("-m", "trans02.generate_trans02"),
-    "v2": ("-m", "v2.generate_v2"),
-    "v2-16m": ("-m", "v2.generate_16m"),
     "v2.1-handflow": ("-m", "v2.generate_16m_handflow_dynamic_arranger"),
 }
-DENSITY_PROFILE_PATH = ROOT / "maimai_finale_dataset" / "prepared_v2" / "test_density_profile.json"
+DENSITY_PROFILE_PATH = ROOT / "runtime_data" / "test_density_profile.json"
 MAX_UPLOAD_BYTES = 500 * 1024 * 1024
 INVALID_WINDOWS_NAME = re.compile(r'[<>:"/\\|?*\x00-\x1f]')
 RESERVED_WINDOWS_NAMES = {
@@ -41,7 +36,7 @@ UPLOAD_ROOT.mkdir(parents=True, exist_ok=True)
 app = FastAPI(
     title="ORBIT-8",
     description="Neural maimai chart engine by SeaLandX",
-    version="1.6.0",
+    version="2.1.0-preview",
 )
 generation_lock = asyncio.Lock()
 DENSITY_PROFILE = json.loads(DENSITY_PROFILE_PATH.read_text(encoding="utf-8"))
@@ -120,7 +115,7 @@ async def density_profile() -> dict:
 @app.post("/api/generate")
 async def generate(
     audio: UploadFile = File(...),
-    model: str = Form("v1.7.1"),
+    model: str = Form("v2.1-handflow"),
     title: str = Form(...),
     artist: str = Form("Unknown"),
     bpm: float | None = Form(None),

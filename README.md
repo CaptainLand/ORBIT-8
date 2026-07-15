@@ -3,9 +3,10 @@
 [English](README.md) | [简体中文](README.zh-CN.md)
 
 > [!IMPORTANT]
-> **Source preview only:** model checkpoints and training data are not included.
-> This repository cannot generate charts out of the box. A downloadable
-> inference package and properly licensed weights will be provided separately.
+> **Repository source archives do not include model checkpoints.** Download the
+> complete `ORBIT-8-v2.1.0-preview-windows.zip` asset from
+> [GitHub Releases](https://github.com/CaptainLand/ORBIT-8/releases) to run the
+> model. Training data is intentionally not distributed.
 
 **Neural maimai chart engine by SeaLandX.**
 
@@ -72,10 +73,23 @@ the rhythm model uses the expanded 16M architecture.
 
 Generated charts use `SeaLandX feat. ORBIT-8` as the default designer credit.
 
-## Run
+## Download And Run
+
+The v2.1 preview currently requires Windows, Python 3.12, and an NVIDIA GPU with
+a working CUDA 12.8 driver.
+
+1. Download and extract `ORBIT-8-v2.1.0-preview-windows.zip` from
+   [Releases](https://github.com/CaptainLand/ORBIT-8/releases).
+2. Open PowerShell in the extracted folder and install the environment:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\start_maimai_web.ps1
+.\setup_orbit8.ps1
+```
+
+3. Start the local web interface:
+
+```powershell
+.\start_maimai_web.ps1
 ```
 
 Open <http://127.0.0.1:8765/> and import an MP3. The web interface supports model
@@ -84,6 +98,6 @@ selection and controls for difficulty, interaction, sweep, and jack intensity.
 ## Training Data Notice
 
 Training datasets, official chart archives, copyrighted audio, generated songs,
-virtual environments, and large checkpoints are not intended to be committed to
-this source repository. Publish only data and model files for which you have the
-necessary distribution rights.
+virtual environments, and intermediate checkpoints are not distributed. The
+release package contains only the inference weights and compact runtime metadata
+required to run ORBIT-8 v2.1.

@@ -10,7 +10,7 @@ from v2.handflow import optimize_handflow
 from v2.rhythm_model_16m import OrbitV2RhythmModel16M
 
 
-ROOT = Path(r"D:\trans")
+ROOT = Path(__file__).resolve().parents[1]
 pipeline.ENGINE_NAME = "ORBIT-8"
 pipeline.ENGINE_VERSION = "v2.1 16M Dynamic HandFlow"
 pipeline.RHYTHM_CHECKPOINT = ROOT / "v2" / "releases" / "orbit_v2_16m_calibrated.pt"
