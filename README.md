@@ -1,5 +1,7 @@
 # ORBIT-8
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 **Neural maimai chart engine by SeaLandX.**
 
 ORBIT-8 converts an MP3 and a target difficulty into a FiNALE-compatible chart
